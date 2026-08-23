@@ -39,9 +39,7 @@ android.allow_cleartext_traffic = True
 # FIXED: removed invalid android.service line that was causing build errors
 android.entrypoint = org.kivy.android.PythonActivity
 
-# ── python-for-android ───────────────────────────────────────────────────────
-# Pin to a known-good release for reproducible builds
-p4a.branch = master
+
 
 # ── Screen orientation ───────────────────────────────────────────────────────
 orientation = portrait
