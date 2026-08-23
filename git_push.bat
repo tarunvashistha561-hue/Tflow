@@ -14,14 +14,7 @@ if %errorlevel% neq 0 (
     exit /b
 )
 
-:: Prompt user for repo URL
-set /p REPO_URL="Enter your GitHub Repository URL (e.g., https://github.com/username/repo): "
-
-if "%REPO_URL%"=="" (
-    echo [ERROR] Repository URL cannot be empty!
-    pause
-    exit /b
-)
+set REPO_URL=https://github.com/tarunvashistha561-hue/Tflow.git
 
 echo.
 echo [1/4] Initialising local Git repository...
