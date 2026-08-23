@@ -39,6 +39,37 @@ jobs:
           npx cap add android
           npx cap sync android
 
+      # ── 5.5. Generate custom Tflow app launcher icons ─────────────────────
+      - name: Generate App Launcher Icons
+        run: |
+          RES_DIR="android/app/src/main/res"
+          
+          resize_legacy() {
+            local size=$1
+            local folder=$2
+            convert assets/logo.png -resize "${size}x${size}" "${RES_DIR}/${folder}/ic_launcher.png"
+            convert assets/logo.png -resize "${size}x${size}" "${RES_DIR}/${folder}/ic_launcher_round.png"
+          }
+          
+          resize_foreground() {
+            local size=$1
+            local folder=$2
+            convert assets/logo.png -resize "${size}x${size}" "${RES_DIR}/${folder}/ic_launcher_foreground.png"
+          }
+          
+          resize_legacy 48 "mipmap-mdpi"
+          resize_legacy 72 "mipmap-hdpi"
+          resize_legacy 96 "mipmap-xhdpi"
+          resize_legacy 144 "mipmap-xxhdpi"
+          resize_legacy 192 "mipmap-xxxhdpi"
+          
+          resize_foreground 108 "mipmap-mdpi"
+          resize_foreground 162 "mipmap-hdpi"
+          resize_foreground 216 "mipmap-xhdpi"
+          resize_foreground 324 "mipmap-xxhdpi"
+          resize_foreground 432 "mipmap-xxxhdpi"
+
+
       # ── 6. Build APK via Gradle ─────────────────────────────────────────
       - name: Build Android APK
         run: |
