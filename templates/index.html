@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Digital Notebook — Your beautiful, fast, and private note-taking app. Create, edit, search, and manage notes with ease." />
+  <meta name="theme-color" content="#4F46E5" />
+  <title>Tflow — My Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+  <!-- ══ App Shell ══════════════════════════════════════════════════════════ -->
+  <div id="app" class="app-shell">
+
+    <!-- ── Header ──────────────────────────────────────────────────────────── -->
+    <header class="app-header" role="banner">
+      <div class="header-inner">
+        <div class="brand">
+          <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Digital Notebook logo" class="brand-logo" width="40" height="40" />
+          <div class="brand-text">
+            <h1 class="brand-name">Tflow</h1>
+            <span class="brand-tagline">Your thoughts, organised</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <span class="note-count-badge" id="noteCountBadge" aria-label="Total notes">
+            {{ total }} note{{ 's' if total != 1 else '' }}
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Search bar ──────────────────────────────────────────────────────── -->
+    <section class="search-section" aria-label="Search notes">
+      <div class="search-wrapper">
+        <span class="search-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </span>
+        <input
+          type="search"
+          id="searchInput"
+          class="search-input"
+          placeholder="Search your notes…"
+          autocomplete="off"
+          aria-label="Search notes"
+          role="searchbox"
+        />
+        <button class="search-clear" id="searchClear" aria-label="Clear search" hidden>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M18 6 6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ── Main content ────────────────────────────────────────────────────── -->
+    <main class="main-content" role="main">
+
+      <!-- Search results info bar (shown only during active search) -->
+      <div class="results-bar" id="resultsBar" hidden>
+        <span id="resultsText"></span>
+        <button class="btn-text" id="clearSearchBtn">Clear search</button>
+      </div>
+
+      <!-- Notes grid -->
+      <section class="notes-grid" id="notesGrid" aria-label="Notes list">
+
+        {% for note in notes %}
+        <article
+          class="note-card"
+          data-id="{{ note.id }}"
+          data-title="{{ note.title | lower }}"
+          data-content="{{ note.content | lower }}"
+        >
+          <div class="note-card-body">
+            <h2 class="note-title" id="note-title-{{ note.id }}">{{ note.title }}</h2>
+            <p class="note-preview">{{ note.content[:140] }}{% if note.content | length > 140 %}…{% endif %}</p>
+          </div>
+          <footer class="note-card-footer">
+            <time class="note-date" datetime="{{ note.created_at }}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+              </svg>
+              {{ note.created_at }}
+            </time>
+            {% if note.updated_at != note.created_at %}
+            <time class="note-updated" datetime="{{ note.updated_at }}" title="Last updated">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+              Edited {{ note.updated_at }}
+            </time>
+            {% endif %}
+            <div class="note-actions">
+              <a
+                href="{{ url_for('edit_note_page', note_id=note.id) }}"
+                class="btn-icon btn-edit"
+                aria-label="Edit note: {{ note.title }}"
+                id="edit-btn-{{ note.id }}"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+                Edit
+              </a>
+              <button
+                class="btn-icon btn-delete"
+                data-id="{{ note.id }}"
+                data-title="{{ note.title }}"
+                aria-label="Delete note: {{ note.title }}"
+                id="delete-btn-{{ note.id }}"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                  <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>
+                </svg>
+                Delete
+              </button>
+            </div>
+          </footer>
+        </article>
+        {% endfor %}
+
+        <!-- Empty state: always in DOM so JS can reference it safely -->
+        <div class="empty-state" id="emptyState" {% if notes %}hidden{% endif %}>
+          <div class="empty-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <h3>No notes yet</h3>
+          <p>Tap the <strong>+</strong> button to create your first note.</p>
+        </div>
+
+        <!-- Dynamic empty state (shown during search with no results) -->
+        <div class="empty-state" id="noResultsState" hidden>
+          <div class="empty-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+          </div>
+          <h3>No results found</h3>
+          <p>Try a different search term.</p>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- ── FAB (Floating Action Button) ───────────────────────────────────── -->
+    <a
+      href="{{ url_for('add_note_page') }}"
+      class="fab"
+      id="fabAdd"
+      aria-label="Add new note"
+      role="button"
+    >
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+    </a>
+
+  </div><!-- /app-shell -->
+
+
+  <!-- ══ Delete Confirmation Modal ══════════════════════════════════════════ -->
+  <div class="modal-overlay" id="deleteModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal">
+      <div class="modal-icon modal-icon--danger">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>
+        </svg>
+      </div>
+      <h2 class="modal-title" id="modalTitle">Delete this note?</h2>
+      <p class="modal-body" id="modalNoteTitle"></p>
+      <p class="modal-hint">This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="cancelDeleteBtn">Cancel</button>
+        <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ Toast Notification ══════════════════════════════════════════════════ -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

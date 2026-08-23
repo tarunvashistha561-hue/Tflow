@@ -1,0 +1,44 @@
+[
+  {
+    "id": 6,
+    "title": "syllabus of 3rd sem",
+    "content": "SUBJECT NAME: Digital Electronics\nMODULE 1. Fundamentals of digital systems and logic families\nMODULE 2. Combinational digitalcircuit\nMODULE 3. Sequential circuit and systems\nMODULE 4. A/D and D/A converters\nMODULE 5. Semiconductor memories and programmable logic device\n\n\nSUBJECT NAME: Data structure & algorithm\nMODULE 1. introduction\nMODULE 2. Stacks and queues\nMODULE 3. Linked list\nMODULE 4. sorting and hashing\n\n\nSUBJECT NAME: Analog electronic circuit\nMODULE 1. Diode circuit\nMODULE 2. BJT circuits\nMODULE 3. MOSFET circuits\nMODULE 4. Differential , multistage and operational amplifiers\nMODULE 5. Linear applications of OP-AMP\nMODULE 6. Nonlinear applications of Op-AMP\n\n\nSUBJECT NAME: Effective technical communication\nMODULE 1. Information design and development\nMODULE 2. Technical writing , grammer and editing\nMODULE 3. Self development and assessment\nMODULE 4. Communication and technical writing\nMODULE 5. Ethics",
+    "created_at": "2026-08-23 20:30",
+    "updated_at": "2026-08-23 20:30"
+  },
+  {
+    "id": 1,
+    "title": "Shopping List",
+    "content": "Milk\nBread\nEggs\nButter\nOrange Juice\nApples (6)\nYoghurt\nhello",
+    "created_at": "2026-08-23 19:40",
+    "updated_at": "2026-08-23 20:01"
+  },
+  {
+    "id": 2,
+    "title": "Meeting Notes - Q3 Review",
+    "content": "Attendees: Tarun, Priya, Raj\n\nAgenda:\n1. Quarterly targets review\n2. New product roadmap\n3. Team expansion plans\n\nAction items:\n- Prepare slides by Friday\n- Send email to stakeholders\n- Schedule follow-up for next week",
+    "created_at": "2026-08-23 19:40",
+    "updated_at": "2026-08-23 19:40"
+  },
+  {
+    "id": 4,
+    "title": "Book Recommendations",
+    "content": "Must read:\n1. Atomic Habits - James Clear\n2. Deep Work - Cal Newport\n3. The Pragmatic Programmer\n4. Clean Code - Robert Martin\n5. Python Crash Course - Eric Matthes",
+    "created_at": "2026-08-23 19:40",
+    "updated_at": "2026-08-23 19:40"
+  },
+  {
+    "id": 5,
+    "title": "Ideas for the App",
+    "content": "Future features to add:\n- Dark mode toggle button\n- Note categories with colour tags\n- Export notes to PDF\n- PIN lock screen\n- Cloud sync via Firebase\n- Search history\n- Favourite notes section",
+    "created_at": "2026-08-23 19:40",
+    "updated_at": "2026-08-23 19:40"
+  },
+  {
+    "id": 7,
+    "title": "gfghfh",
+    "content": "jfjjhjvvm",
+    "created_at": "2026-08-23 20:35",
+    "updated_at": "2026-08-23 20:35"
+  }
+]

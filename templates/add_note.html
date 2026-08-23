@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Digital Notebook — Add a new note to your personal notebook." />
+  <meta name="theme-color" content="#4F46E5" />
+  <title>Add Note — Tflow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body class="page-form">
+
+  <div id="app" class="app-shell form-shell">
+
+    <!-- ── Header ──────────────────────────────────────────────────────────── -->
+    <header class="app-header form-header" role="banner">
+      <div class="header-inner">
+        <a href="{{ url_for('index') }}" class="btn-back" aria-label="Back to notes">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M19 12H5M12 5l-7 7 7 7"/>
+          </svg>
+        </a>
+        <h1 class="page-title">New Note</h1>
+        <div class="header-actions">
+          <button class="btn-icon-ghost" id="discardBtn" type="button" aria-label="Discard note">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <path d="M18 6 6 18M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Form ────────────────────────────────────────────────────────────── -->
+    <main class="main-content form-content" role="main">
+      <form id="addNoteForm" class="note-form" novalidate aria-label="Add note form">
+
+        <!-- Title -->
+        <div class="form-group" id="titleGroup">
+          <label for="noteTitle" class="form-label">Title</label>
+          <input
+            type="text"
+            id="noteTitle"
+            name="title"
+            class="form-input"
+            placeholder="Give your note a title…"
+            maxlength="200"
+            autocomplete="off"
+            aria-required="true"
+            aria-describedby="titleError"
+          />
+          <span class="char-counter" id="titleCounter">0 / 200</span>
+          <span class="form-error" id="titleError" role="alert" hidden></span>
+        </div>
+
+        <!-- Content -->
+        <div class="form-group" id="contentGroup">
+          <label for="noteContent" class="form-label">Content</label>
+          <textarea
+            id="noteContent"
+            name="content"
+            class="form-textarea"
+            placeholder="Start writing your note here…"
+            rows="12"
+            aria-required="true"
+            aria-describedby="contentError"
+          ></textarea>
+          <span class="form-error" id="contentError" role="alert" hidden></span>
+        </div>
+
+        <!-- Actions -->
+        <div class="form-actions">
+          <a href="{{ url_for('index') }}" class="btn btn-ghost" id="cancelBtn">Cancel</a>
+          <button type="submit" class="btn btn-primary" id="saveBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
+            </svg>
+            Save Note
+          </button>
+        </div>
+
+      </form>
+    </main>
+
+  </div>
+
+  <!-- ══ Toast Notification ══════════════════════════════════════════════════ -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

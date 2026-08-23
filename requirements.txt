@@ -1,0 +1,11 @@
+# Digital Notebook — Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Web framework (Flask — lightweight, WSGI-compatible)
+Flask==3.0.3
+
+# Production WSGI server (used inside Android APK instead of Flask dev server)
+waitress==3.0.0
+
+# Optional: HTTP client for testing routes during development
+requests==2.32.3

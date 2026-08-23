@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#4F46E5" />
+  <title>Page Not Found — Digital Notebook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <style>
+    .error-page {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 32px 24px;
+      gap: 20px;
+    }
+    .error-code {
+      font-size: 80px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #4F46E5, #818CF8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .error-title { font-size: 22px; font-weight: 700; color: var(--color-text-primary); }
+    .error-msg { font-size: 15px; color: var(--color-text-secondary); max-width: 300px; }
+    .btn-home {
+      display: inline-flex; align-items: center; gap: 8px;
+      height: 48px; padding: 0 28px;
+      background: linear-gradient(135deg, #4F46E5, #6366F1);
+      color: #fff; border-radius: 9999px;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(79,70,229,.35);
+      transition: all .2s;
+    }
+    .btn-home:hover { opacity: .9; transform: translateY(-1px); }
+  </style>
+</head>
+<body>
+  <div class="error-page">
+    <div class="error-code">404</div>
+    <h1 class="error-title">Page not found</h1>
+    <p class="error-msg">The page you're looking for doesn't exist or was moved.</p>
+    <a href="{{ url_for('index') }}" class="btn-home">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to Notes
+    </a>
+  </div>
+</body>
+</html>
