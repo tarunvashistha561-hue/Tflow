@@ -47,12 +47,10 @@ jobs:
           restore-keys: |
             buildozer-${{ runner.os }}-
 
-      # ── 6. Build APK ────────────────────────────────────────────────────
       - name: Build debug APK with Buildozer
         run: |
           buildozer android debug
-        env:
-          ANDROID_HOME: ${{ env.ANDROID_HOME }}
+
 
       # ── 7. Upload APK as artifact ────────────────────────────────────────
       - name: Upload APK artifact

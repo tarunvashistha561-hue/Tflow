@@ -17,8 +17,7 @@ version = 1.0.0
 
 # ── Requirements ────────────────────────────────────────────────────────────
 # Kivy is provided by python-for-android; Flask and waitress are pip packages
-# Note: jnius is a p4a recipe — NOT a pip package, so do NOT list it here
-requirements = python3,kivy,flask,waitress
+requirements = python3,kivy,flask,waitress,jnius
 
 # ── Android configuration ───────────────────────────────────────────────────
 # Only INTERNET is needed — notes are stored in app-private directory
