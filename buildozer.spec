@@ -25,7 +25,7 @@ android.permissions = INTERNET
 
 android.api = 33
 android.minapi = 24
-android.ndk = 25c
+android.ndk = 25b
 android.ndk_api = 24
 
 # Architecture: arm64-v8a for modern devices, armeabi-v7a for older ones
