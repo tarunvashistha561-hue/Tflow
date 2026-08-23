@@ -1,0 +1,6 @@
+{
+  "appId": "com.tarun.tflow",
+  "appName": "Tflow",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
